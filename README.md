@@ -1,6 +1,8 @@
 # nBloons TD 5
 A recreation of the popular Bloons Tower Defense 5 for the Ti-Nspire calculator. This is based heavily upon the Ndless software.
 
+![Example image of the game in development](https://ndless-games--mumflrfumperdin.repl.co/Resources/exampleGame.JPG)
+
 ## Installation
 Make sure you have [ndless](https://ndless.me) installed on your calculator before you begin this. Then, using a TI calculator to computer transfer software such as [TI-Nspire Computer Link Software](https://education.ti.com/en/software/details/en/82035809F7E6474099944056CCB01C20/ti-nspire_computerlink) while having the calculator to computer USB cable plugged in as shown below, transfer the .tns file.
 
