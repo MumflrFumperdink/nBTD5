@@ -80,7 +80,7 @@ extern unsigned long oT;
 extern bool done;
 extern SDL_Surface* screen;
 extern nSDL_Font *font, *grey_font, *black_font;
-extern std::vector<GameObject> interactables; //0-6 are charachter_select at bottom, then 7 is speed, then 8-9 are upgrade, rest are charachters
+extern std::vector<GameObject> interactables; //0-6 are charachter_select at bottom, then 7-8 are upgrade, 9 is speed, rest are charachters
 extern std::vector<Array<short, 2>> checkpoints;
 extern std::vector<SDL_Rect> trackCheckpoints;
 
