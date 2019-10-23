@@ -23,9 +23,9 @@ bool Mouse::intersects(std::vector<SDL_Rect>* rects) {
 
 void Mouse::draw(HUD* h) {
 	signed char touching = whichInteractable(h);
+	signed char selecting = touching + h->getCharachterOffset();
 
 	if (h->getSelected() >= 0 && h->getSelected() < 7) {
-		unsigned char selecting = h->getSelected() + h->getCharachterOffset();
 		SDL_Surface* charachter = load_Charachter(static_cast<Charachter>(selecting));
 		filledCircleRGBA(screen, x, y, charRange[selecting], h->getMoney() >= (unsigned int)charCost[selecting] && !intersects(&trackCheckpoints) ? 0 : 255, 0, 0, 128);
 		SDL_CustomBlit(charachter, x, y, 0);
@@ -38,6 +38,10 @@ void Mouse::draw(HUD* h) {
 		SDL_Rect pos_rect = {x - 6, y - 1};
 		SDL_BlitSurface(touching_cursor, NULL, screen, &pos_rect);
 		SDL_FreeSurface(touching_cursor);
+
+		if (touching >= 0 && touching < 7) {
+			nSDL_DrawString(screen, font, x + 5, y - 5, "$%d", charCost[selecting]);
+		}
 	}
 	else {
 		SDL_Rect pos_rect = {x, y};
