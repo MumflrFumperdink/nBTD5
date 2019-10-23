@@ -16,7 +16,7 @@ HUD::HUD() {
 	lives = 150; //https://bloons.fandom.com/wiki/Lives
 }
 
-void HUD::draw() {
+void HUD::draw(float fElapsedTime) {
 	SDL_Rect hud_rect = {0, LEVEL_HEIGHT + 1};
 	SDL_BlitSurface(hud, NULL, screen, &hud_rect);
 	//every plank starting at x = 100
@@ -58,7 +58,7 @@ void HUD::draw() {
 	nSDL_DrawString(screen, font, 26, LEVEL_HEIGHT + 17, "%d", lives);
 
 	nSDL_DrawString(screen, font, 4, 4, (round == 0 ? "Round -" : "Round %d"), round);
-	//nSDL_DrawString(screen, font, 4, 20, "Selecting: %d", selecting);
+	nSDL_DrawString(screen, font, 4, 20, "%.2f FPS", (1.0/fElapsedTime));
 
 	//Speed
 	SDL_Surface* speedImg = nullptr;

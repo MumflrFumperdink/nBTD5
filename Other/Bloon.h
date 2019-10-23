@@ -29,7 +29,7 @@ class Bloon {
 		BloonType type; //Type of bloon
 	public:
 		Bloon(BloonType intype);
-		bool gameLoop(HUD* h); //returns true if poped
+		bool gameLoop(float fElapsedTime, HUD* h); //returns true if poped
 		void draw();
 		float getX();
 		float getY();

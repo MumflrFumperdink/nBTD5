@@ -11,10 +11,10 @@ Projectile::~Projectile() {
   //??
 }
 
-short Projectile::getX() {
+float Projectile::getX() {
   return x;
 }
 
-short Projectile::getY() {
+float Projectile::getY() {
   return y;
 }

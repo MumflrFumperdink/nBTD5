@@ -16,7 +16,7 @@ class Dart : public Projectile {
 	public:
 		Dart(short inx, short iny, double inangle, unsigned char inpopablity);
 		void draw();
-		bool gameLoop(std::vector<Bloon*>* bloons, HUD* h);
+		bool gameLoop(float fElapsedTime, std::vector<Bloon*>* bloons, HUD* h);
 };
 
 #endif

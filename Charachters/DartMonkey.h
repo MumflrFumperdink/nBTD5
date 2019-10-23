@@ -15,7 +15,7 @@ class DartMonkey : public Character {
 		unsigned short getUpgradeCost(unsigned char path);
 		void upGrade(unsigned char path);
 		void draw(HUD* h);
-		void gameLoop(HUD* h, std::vector<Bloon*>* bloons, std::vector<Projectile*>* projectiles);
+		void gameLoop(float fElapsedTime, HUD* h, std::vector<Bloon*>* bloons, std::vector<Projectile*>* projectiles);
 		void select();
 		void deselect();
 };

@@ -10,7 +10,7 @@
 
 
 class Boomerang : public Projectile {
-	private:
+        private:
                 bool isGlaive, isHot;
                 unsigned char popablity;
                 //Using rotated ellipse for path
@@ -21,10 +21,10 @@ class Boomerang : public Projectile {
                 float theta;
                 //Time input
                 float tin;
-	public:
-		Boomerang(short ox1, short oy1, short x2, short y2, double inangle, unsigned char inpopablity, bool hot, bool glaive);
-		void draw();
-		bool gameLoop(std::vector<Bloon*>* bloons, HUD* h);
+        public:
+        	Boomerang(short ox1, short oy1, short x2, short y2, double inangle, unsigned char inpopablity, bool hot, bool glaive);
+        	void draw();
+        	bool gameLoop(float fElapsedTime, std::vector<Bloon*>* bloons, HUD* h);
 };
 
 #endif

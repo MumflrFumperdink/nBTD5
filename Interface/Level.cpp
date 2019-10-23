@@ -93,10 +93,10 @@ bool Level::hasRoundCleared(unsigned char currentRound) {
 	return count == numBloonTypes;
 }
 
-void Level::loop(HUD* h) {
+void Level::loop(float fElapsedTime, HUD* h) {
 	if (h->getRound() < 16 and h->getSpeed() > PAUSE) {
 		for (unsigned char i = 0; i < sizeof(rounds[h->getRound()])/sizeof(rounds[h->getRound()][0]); i++) {
-			if (rounds[h->getRound()][i][0] > 0 && oT % (rounds[h->getRound()][i][1] * h->getInvSpeed())  == 0) { //Is the type in this round
+			if (rounds[h->getRound()][i][0] > 0 && oT % (rounds[h->getRound()][i][1] * h->getInvSpeed()) == 0) { //Is the type in this round
 				bloons.push_back(new Bloon(static_cast<BloonType>(i)));
 				rounds[h->getRound()][i][0]--;
 			}
@@ -104,14 +104,14 @@ void Level::loop(HUD* h) {
 	}
 
 	for (signed short i = projectiles.size() - 1; i >= 0; i--) {
-		if (projectiles[i]->gameLoop(&bloons, h) || projectiles[i]->getX() < 0 || projectiles[i]->getX() > S_WIDTH || projectiles[i]->getY() < 0 || projectiles[i]->getY() > S_HEIGHT) {
+		if (projectiles[i]->gameLoop(fElapsedTime, &bloons, h) || projectiles[i]->getX() < 0 || projectiles[i]->getX() > S_WIDTH || projectiles[i]->getY() < 0 || projectiles[i]->getY() > S_HEIGHT) {
 			delete projectiles[i];
 			projectiles.erase(projectiles.begin() + i);
 		}
 	}
 
 	for (short i = 0; i < charchters.size(); i++) {
-		charchters[i]->gameLoop(h, &bloons, &projectiles);
+		charchters[i]->gameLoop(fElapsedTime, h, &bloons, &projectiles);
 	}
 
 	for (short i = 0; i < bloons.size(); i++) {
@@ -124,7 +124,7 @@ void Level::loop(HUD* h) {
 			}
 		}
 
-		if (bloons[i]->gameLoop(h)) {
+		if (bloons[i]->gameLoop(fElapsedTime, h)) {
 			if (bloons[i]->getNextCheckpoint() == checkpoints.size() - 1) { //reached the end
 				h->setLives(h->getLives() - bloonHealth[static_cast<unsigned char>(bloons[i]->getType())]);
 				if (h->getLives() <= 0) done = true;

@@ -23,7 +23,7 @@ class HUD {
 	public:
 		HUD();
 		~HUD();
-		void draw();
+		void draw(float fElapsedTime);
 		void select(unsigned char object, Level* l);
 		void deselect(Level* l);
 		signed char getSelected();

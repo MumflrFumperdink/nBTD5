@@ -28,7 +28,7 @@ Boomerang::Boomerang(short ox, short oy, short x2, short y2, double inangle, uns
   theta = atan2(y1 - y2, x1 - x2);
 }
 
-bool Boomerang::gameLoop(std::vector<Bloon*>* bloons, HUD* h) {
+bool Boomerang::gameLoop(float fElapsedTime, std::vector<Bloon*>* bloons, HUD* h) {
 	for (signed short i = bloons->size() - 1; i >= 0; i--) {
 		SDL_Rect d = {x - (projectile_dart[1]/2), y - (projectile_dart[2]/2), projectile_dart[1], projectile_dart[2]};
 
@@ -54,7 +54,7 @@ bool Boomerang::gameLoop(std::vector<Bloon*>* bloons, HUD* h) {
 	y = rx * cos(tin) * sin(theta) + ry * sin(tin) * cos(theta) + cy;
 
 	angle += 10;
-	tin += 0.3 * h->getSpeed();
+	tin += 5.1 * fElapsedTime * h->getSpeed();
 	return tin >= 2 * PI;
 }
 

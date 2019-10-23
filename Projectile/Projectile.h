@@ -12,16 +12,16 @@ class HUD;
 
 class Projectile {
 	protected:
-		short x, y;
+		float x, y;
 		double angle;
 		Bloon* lastPopped;
 	public:
 		Projectile(short inx, short iny, double inangle);
-		short getX();
-		short getY();
+		float getX();
+		float getY();
 		virtual ~Projectile();
 		virtual void draw() = 0;
-		virtual bool gameLoop(std::vector<Bloon*>* bloons, HUD* h) = 0;
+		virtual bool gameLoop(float fElapsedTime, std::vector<Bloon*>* bloons, HUD* h) = 0;
 };
 
 #endif

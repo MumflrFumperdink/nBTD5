@@ -16,7 +16,7 @@ class Character {
 		double angle;
 		bool selected;
 		signed short targeting;
-		unsigned long startTime;
+		float timeDifference;
 		unsigned char upgrade[2] = {0, 0};
 		static unsigned char hud_x;
 	public:
@@ -26,7 +26,7 @@ class Character {
 		virtual unsigned short getUpgradeCost(unsigned char path) = 0;
 		virtual void upGrade(unsigned char path) = 0;
 		virtual void draw(HUD* h) = 0;
-		virtual void gameLoop(HUD* h, std::vector<Bloon*>* bloons, std::vector<Projectile*>* projectiles) = 0;
+		virtual void gameLoop(float fElapsedTime, HUD* h, std::vector<Bloon*>* bloons, std::vector<Projectile*>* projectiles) = 0;
 		virtual void select() = 0;
 		virtual void deselect() = 0;
 };

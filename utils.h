@@ -82,6 +82,7 @@ static const unsigned short Boomerang_Monkey_upgradePrices[2][4] = {
 
 double radians(double degrees);
 void SDL_CustomBlit(SDL_Surface* img, short x, short y, double angle);
+void SDL_CustomBlit(SDL_Surface* img, float x, float y, double angle);
 void SDL_CustomBlitCorner(SDL_Surface* img, short x, short y);
 void SDL_RotateBlitAroundPoint(SDL_Surface* img, double angle, short dist, short x, short y);
 void SDL_RotateBlitAroundPoint(SDL_Surface* img, double angle, short dist, short x, short y, short offsetY);

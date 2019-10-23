@@ -71,11 +71,20 @@ int main(void) {
         HUD h = HUD();
         Level level = Level(MONKEY_LANE);
 
-        while (!done) {
-            level.draw(&h);
-            level.loop(&h);
+        long tp1 = 0;
+        long tp2 = 0;
+        float fElapsedTime = 0.0;
 
-            h.draw();
+        while (!done) {
+            // Get time in seconds (GetTicks() gets it in milliseconds)
+            tp2 = SDL_GetTicks();
+            fElapsedTime = (tp2 - tp1) / 1000.0;
+            tp1 = tp2;
+
+            level.draw(&h);
+            level.loop(fElapsedTime, &h);
+
+            h.draw(fElapsedTime);
 
             m.update();
             if (m.hasMoved()) {

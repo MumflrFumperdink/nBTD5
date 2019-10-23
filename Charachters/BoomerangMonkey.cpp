@@ -13,13 +13,13 @@ BoomerangMonkey::BoomerangMonkey(short inx, short iny) : Character(inx, iny) {
 	popablity = 4;
 }
 
-void BoomerangMonkey::gameLoop(HUD* h, std::vector<Bloon*>* bloons, std::vector<Projectile*>* projectiles) {
+void BoomerangMonkey::gameLoop(float fElapsedTime, HUD* h, std::vector<Bloon*>* bloons, std::vector<Projectile*>* projectiles) {
 	if (targeting == -1) {
 		for (unsigned short i = 0; i < bloons->size(); i++) {
 			if (!bloons->at(i)->isUnderneath() and distBetween(x, y, bloons->at(i)->getX(), bloons->at(i)->getY()) <= range) {
 				angle = angleBetween(x, y, bloons->at(i)->getX(), bloons->at(i)->getY());
 				targeting = i;
-				startTime = oT;
+				timeDifference = 0.0;
 				return;
 			}
 		}
@@ -32,8 +32,9 @@ void BoomerangMonkey::gameLoop(HUD* h, std::vector<Bloon*>* bloons, std::vector<
 			return;
 		}
 		if (!bloons->at(targeting)->isUnderneath() and distBetween(x, y, bloons->at(targeting)->getX(), bloons->at(targeting)->getY()) <= range) angle = angleBetween(x, y, bloons->at(targeting)->getX(), bloons->at(targeting)->getY());
-		unsigned long timeDifference = oT - startTime;
-		if (timeDifference % (h->getInvSpeed()) == 0) {
+		timeDifference += fElapsedTime;
+		if (timeDifference >= 0.04 / h->getSpeed()) {
+			timeDifference -= 0.04 / h->getSpeed();
 			stage++;
 		}
 		if (stage > 3) {

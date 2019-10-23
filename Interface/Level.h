@@ -20,7 +20,7 @@ class Level {
 		~Level();
 		bool hasRoundCleared(unsigned char currentRound);
 		void draw(HUD* h);
-		void loop(HUD* h);
+		void loop(float fElapsedTime, HUD* h);
 		void addCharachter(Mouse* m, HUD* h);
 		std::vector<Character*>& getCharachters();
 		std::vector<SDL_Rect>* getTrackCheckpoints();

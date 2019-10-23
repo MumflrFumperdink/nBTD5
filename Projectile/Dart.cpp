@@ -8,13 +8,13 @@
 #include "Projectile.h"
 
 Dart::Dart(short inx, short iny, double inangle, unsigned char inpopablity) : Projectile(inx, iny, inangle) {
-	unsigned char speed = 6;
+	constexpr const unsigned char speed = 240;
 	vx = -(short)(speed * sin(radians(angle)));
 	vy = -(short)(speed * cos(radians(angle)));
 	popablity = inpopablity;
 }
 
-bool Dart::gameLoop(std::vector<Bloon*>* bloons, HUD* h) {
+bool Dart::gameLoop(float fElapsedTime, std::vector<Bloon*>* bloons, HUD* h) {
 	for (signed short i = bloons->size() - 1; i >= 0; i--) {
 		SDL_Rect d = {x - (projectile_dart[1]/2), y - (projectile_dart[2]/2), projectile_dart[1], projectile_dart[2]};
 
@@ -34,8 +34,8 @@ bool Dart::gameLoop(std::vector<Bloon*>* bloons, HUD* h) {
 			return popablity == 0;
 		}
 	}
-	x += vx * h->getSpeed();
-	y += vy * h->getSpeed();
+	x += vx * fElapsedTime * h->getSpeed();
+	y += vy * fElapsedTime * h->getSpeed();
 	return false;
 }
 

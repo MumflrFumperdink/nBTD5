@@ -22,7 +22,9 @@ void Bloon::draw() {
 	}
 }
 
-bool Bloon::gameLoop(HUD* h) {
+constexpr const float speed = 90.0;
+
+bool Bloon::gameLoop(float fElapsedTime, HUD* h) {
 	if (goingVer) {
 		if (goingPos) { //Going Down
 			if (y >= checkpoints.at(nextCheckpoint)[1]) {
@@ -30,7 +32,7 @@ bool Bloon::gameLoop(HUD* h) {
 				return switchToNextCheckpoint();
 			}
 			else {
-				y += bloonSpeed[static_cast<unsigned char>(type)] * h->getSpeed();
+				y += bloonSpeed[static_cast<unsigned char>(type)] * fElapsedTime * speed * h->getSpeed();
 			}
 		}
 		else { //Going Up
@@ -39,7 +41,7 @@ bool Bloon::gameLoop(HUD* h) {
 				return switchToNextCheckpoint();
 			}
 			else {
-				y -= bloonSpeed[static_cast<unsigned char>(type)] * h->getSpeed();
+				y -= bloonSpeed[static_cast<unsigned char>(type)] * fElapsedTime * speed * h->getSpeed();
 			}
 		}
 	}
@@ -50,7 +52,7 @@ bool Bloon::gameLoop(HUD* h) {
 				return switchToNextCheckpoint();
 			}
 			else {
-				x += bloonSpeed[static_cast<unsigned char>(type)] * h->getSpeed();
+				x += bloonSpeed[static_cast<unsigned char>(type)] * fElapsedTime * speed * h->getSpeed();
 			}
 		}
 		else { //Going Left
@@ -59,7 +61,7 @@ bool Bloon::gameLoop(HUD* h) {
 				return switchToNextCheckpoint();
 			}
 			else {
-				x -= bloonSpeed[static_cast<unsigned char>(type)] * h->getSpeed();
+				x -= bloonSpeed[static_cast<unsigned char>(type)] * fElapsedTime * speed * h->getSpeed();
 			}
 		}
 	}

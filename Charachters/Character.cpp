@@ -3,10 +3,11 @@
 Character::Character(short inx, short iny) {
   x = inx;
   y = iny;
-  range = startTime = angle = 0;
+  range = angle = 0;
   selected = false;
   targeting = -1;
   stage = 1;
+  timeDifference = 0.0;
 }
 
 Character::~Character() {

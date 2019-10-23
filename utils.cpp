@@ -19,13 +19,17 @@ void SDL_CustomBlit(SDL_Surface* img, short x, short y, double angle) { //x and 
   }
 }
 
+void SDL_CustomBlit(SDL_Surface* img, float x, float y, double angle) {
+  SDL_CustomBlit(img, (short)x, (short)y, angle);
+}
+
 void SDL_CustomBlitCorner(SDL_Surface* img, short x, short y) {
   SDL_Rect img_rect = {x, y};
   SDL_BlitSurface(img, NULL, screen, &img_rect);
 }
 
 void SDL_RotateBlitAroundPoint(SDL_Surface* img, double angle, short dist, short x, short y) { //x and y are center of rotation
-  SDL_CustomBlit(img, x + (short)(dist * sin(radians(angle + 90.0))), y + (short)(dist * cos(radians(angle + 90.0))), angle);
+  SDL_CustomBlit(img, (short)(x + (short)(dist * sin(radians(angle + 90.0)))), (short)(y + (short)(dist * cos(radians(angle + 90.0)))), angle);
 }
 
 void SDL_RotateBlitAroundPoint(SDL_Surface* img, double angle, short dist, short x, short y, short offsetY) {
