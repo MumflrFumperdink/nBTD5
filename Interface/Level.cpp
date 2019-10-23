@@ -127,7 +127,10 @@ void Level::loop(float fElapsedTime, HUD* h) {
 		if (bloons[i]->gameLoop(fElapsedTime, h)) {
 			if (bloons[i]->getNextCheckpoint() == checkpoints.size() - 1) { //reached the end
 				h->setLives(h->getLives() - bloonHealth[static_cast<unsigned char>(bloons[i]->getType())]);
-				if (h->getLives() <= 0) done = true;
+				if (h->getLives() <= 0) {
+					show_msgbox("Game Over...", "You Lost! Better luck next time.");
+					done = true;
+				}
 			}
 			// else { //popped
 			// 	h->setMoney(h->getMoney() - bloonWorth[static_cast<unsigned char>(bloons[i]->getType())]);
