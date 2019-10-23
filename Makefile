@@ -6,7 +6,7 @@ GXX = nspire-g++
 LD  = nspire-ld
 GENZEHN = genzehn
 
-GCCFLAGS = -Wall -Wno-narrowing -Wno-sign-compare -Wno-unused-variable
+GCCFLAGS = -W -marm -Wall -Wextra -Wno-narrowing -Wno-sign-compare -Wno-unused-variable -Wno-missing-field-initializers
 LDFLAGS = 
 ZEHNFLAGS = --name "BloonsTD5"
 
