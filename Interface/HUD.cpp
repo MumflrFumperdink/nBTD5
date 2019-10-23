@@ -61,7 +61,7 @@ void HUD::draw() {
 	//nSDL_DrawString(screen, font, 4, 20, "Selecting: %d", selecting);
 
 	//Speed
-	SDL_Surface* speedImg;
+	SDL_Surface* speedImg = nullptr;
 	switch (speed) {
 		case PAUSE:
 			speedImg = nSDL_LoadImage(hud_speed_paused);

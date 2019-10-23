@@ -16,18 +16,10 @@ class Projectile {
 		double angle;
 		Bloon* lastPopped;
 	public:
-		Projectile(short inx, short iny, double inangle) {
-			x = inx;
-			y = iny;
-			angle = inangle;
-			lastPopped = nullptr;
-		}
-		short getX() {
-			return x;
-		}
-		short getY() {
-			return y;
-		}
+		Projectile(short inx, short iny, double inangle);
+		short getX();
+		short getY();
+		virtual ~Projectile();
 		virtual void draw() = 0;
 		virtual bool gameLoop(std::vector<Bloon*>* bloons, HUD* h) = 0;
 };

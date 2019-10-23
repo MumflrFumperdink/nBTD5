@@ -48,8 +48,8 @@ Level::Level(LevelName l) {
 
 	for (unsigned char i = 0, j = 0; i < checkpoints.size() - 1; i++) {
 		if (j == underneathCheckpoints.size() || i + 1 != underneathCheckpoints.at(j)) {
-			auto a = checkpoints.at(i);
-			auto b = checkpoints.at(i + 1);
+			auto a = checkpoints[i];
+			auto b = checkpoints[i + 1];
 			if (a[0] - b[0] == 0) {
 				if (a[1] - b[1] < 0) trackCheckpoints.push_back({a[0] - 6, a[1], 12, b[1] - a[1]});
 				else trackCheckpoints.push_back({a[0] - 6, a[1] - (a[1] - b[1]), 12, a[1] - b[1]});
@@ -68,20 +68,20 @@ void Level::draw(HUD* h) {
 
 	if (isKeyPressed(KEY_NSPIRE_ENTER)) {
 		for (unsigned char i = 0; i < trackCheckpoints.size(); i++) {
-			SDL_FillRect(screen, &trackCheckpoints.at(i), SDL_MapRGB(screen->format, 255 - (i * (255/trackCheckpoints.size())), 0, i * (255/trackCheckpoints.size())));
+			SDL_FillRect(screen, &trackCheckpoints[i], SDL_MapRGB(screen->format, 255 - (i * (255/trackCheckpoints.size())), 0, i * (255/trackCheckpoints.size())));
 		}
 	}
 
 	for (signed short i = projectiles.size() - 1; i >= 0; i--) {
-		projectiles.at(i)->draw();
+		projectiles[i]->draw();
 	}
 
 	for (short i = 0; i < bloons.size(); i++) {
-		if (!bloons.at(i)->isUnderneath()) bloons.at(i)->draw();
+		if (!bloons[i]->isUnderneath()) bloons[i]->draw();
 	}
 
 	for (short i = 0; i < charchters.size(); i++) {
-		charchters.at(i)->draw(h);
+		charchters[i]->draw(h);
 	}
 }
 
@@ -104,36 +104,36 @@ void Level::loop(HUD* h) {
 	}
 
 	for (signed short i = projectiles.size() - 1; i >= 0; i--) {
-		if (projectiles.at(i)->gameLoop(&bloons, h) || projectiles.at(i)->getX() < 0 || projectiles.at(i)->getX() > S_WIDTH || projectiles.at(i)->getY() < 0 || projectiles.at(i)->getY() > S_HEIGHT) {
-			delete projectiles.at(i);
+		if (projectiles[i]->gameLoop(&bloons, h) || projectiles[i]->getX() < 0 || projectiles[i]->getX() > S_WIDTH || projectiles[i]->getY() < 0 || projectiles[i]->getY() > S_HEIGHT) {
+			delete projectiles[i];
 			projectiles.erase(projectiles.begin() + i);
 		}
 	}
 
 	for (short i = 0; i < charchters.size(); i++) {
-		charchters.at(i)->gameLoop(h, &bloons, &projectiles);
+		charchters[i]->gameLoop(h, &bloons, &projectiles);
 	}
 
 	for (short i = 0; i < bloons.size(); i++) {
 		if (underneathCheckpoints.size() > 0) {
-			if (!bloons.at(i)->isUnderneath() and std::find(underneathCheckpoints.begin(), underneathCheckpoints.end(), bloons.at(i)->getNextCheckpoint()) != underneathCheckpoints.end()) {//in Tunnel
-				bloons.at(i)->goUnder();
+			if (!bloons[i]->isUnderneath() and std::find(underneathCheckpoints.begin(), underneathCheckpoints.end(), bloons[i]->getNextCheckpoint()) != underneathCheckpoints.end()) {//in Tunnel
+				bloons[i]->goUnder();
 			}
-			else if (bloons.at(i)->isUnderneath() and std::find(underneathCheckpoints.begin(), underneathCheckpoints.end(), bloons.at(i)->getNextCheckpoint()) == underneathCheckpoints.end()) { //outOfTunnel
-				bloons.at(i)->goOver();
+			else if (bloons[i]->isUnderneath() and std::find(underneathCheckpoints.begin(), underneathCheckpoints.end(), bloons[i]->getNextCheckpoint()) == underneathCheckpoints.end()) { //outOfTunnel
+				bloons[i]->goOver();
 			}
 		}
 
-		if (bloons.at(i)->gameLoop(h)) {
-			if (bloons.at(i)->getNextCheckpoint() == checkpoints.size() - 1) { //reached the end
-				h->setLives(h->getLives() - bloonHealth[static_cast<unsigned char>(bloons.at(i)->getType())]);
+		if (bloons[i]->gameLoop(h)) {
+			if (bloons[i]->getNextCheckpoint() == checkpoints.size() - 1) { //reached the end
+				h->setLives(h->getLives() - bloonHealth[static_cast<unsigned char>(bloons[i]->getType())]);
 				if (h->getLives() <= 0) done = true;
 			}
 			// else { //popped
-			// 	h->setMoney(h->getMoney() - bloonWorth[static_cast<unsigned char>(bloons.at(i)->getType())]);
+			// 	h->setMoney(h->getMoney() - bloonWorth[static_cast<unsigned char>(bloons[i]->getType())]);
 			// }
 
-			delete bloons.at(i);
+			delete bloons[i];
 			bloons.erase(bloons.begin() + i);
 		}
 	}

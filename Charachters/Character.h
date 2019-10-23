@@ -7,6 +7,7 @@
 #include "../Projectile/Projectile.h"
 
 class Bloon;
+class Projectile;
 
 class Character {
 	protected:
@@ -20,7 +21,8 @@ class Character {
 		static unsigned char hud_x;
 	public:
 		Character(short inx, short iny);
-		void upgradeSideBar(char* title, SDL_Surface* upgrade1, unsigned char addx, char* title1, SDL_Surface* upgrade2, char* title2, bool* avail);
+		void upgradeSideBar(const char* title, SDL_Surface* upgrade1, unsigned char addx, char* title1, SDL_Surface* upgrade2, char* title2, bool* avail);
+		virtual ~Character();
 		virtual unsigned short getUpgradeCost(unsigned char path) = 0;
 		virtual void upGrade(unsigned char path) = 0;
 		virtual void draw(HUD* h) = 0;

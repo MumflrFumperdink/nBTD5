@@ -49,7 +49,7 @@ void BoomerangMonkey::draw(HUD* h) {
 		filledCircleRGBA(screen, x, y, range, 0, 0, 0, 128);
 	}
 
-	SDL_Surface* hand;
+	SDL_Surface* hand = nullptr;
 	if (stage == 1) hand = nSDL_LoadImage(charachter_boomerangMonkey_arm1);
 	else if (stage == 2) hand = nSDL_LoadImage(charachter_boomerangMonkey_arm2);
 	else if (stage == 3) hand = nSDL_LoadImage(charachter_boomerangMonkey_arm3);

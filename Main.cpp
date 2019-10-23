@@ -15,7 +15,7 @@ nSDL_Font* black_font;
 bool done = false;
 unsigned long oT = 0;
 Mouse m;
-std::vector<Array<short, 2>> checkpoints;
+std::vector<std::array<short, 2>> checkpoints;
 std::vector<GameObject> interactables;
 std::vector<unsigned char> underneathCheckpoints;
 std::vector<SDL_Rect> trackCheckpoints;

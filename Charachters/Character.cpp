@@ -9,7 +9,11 @@ Character::Character(short inx, short iny) {
   stage = 1;
 }
 
-void Character::upgradeSideBar(char* title, SDL_Surface* upgrade1, unsigned char addx, char* title1, SDL_Surface* upgrade2, char* title2, bool* avail) {
+Character::~Character() {
+  //Some Stuff
+}
+
+void Character::upgradeSideBar(const char* title, SDL_Surface* upgrade1, unsigned char addx, char* title1, SDL_Surface* upgrade2, char* title2, bool* avail) {
   if (hud_x < 91) {
     hud_x += 10;
   }

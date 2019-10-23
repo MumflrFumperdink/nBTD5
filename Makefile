@@ -6,7 +6,7 @@ GXX = nspire-g++
 LD  = nspire-ld
 GENZEHN = genzehn
 
-GCCFLAGS = -W -marm
+GCCFLAGS = -Wall -Wno-narrowing -Wno-sign-compare -Wno-unused-variable
 LDFLAGS = 
 ZEHNFLAGS = --name "BloonsTD5"
 
@@ -24,22 +24,29 @@ DISTDIR = .
 vpath %.tns $(DISTDIR)
 vpath %.elf $(DISTDIR)
 
+bold := $(shell tput bold)
+sgr0 := $(shell tput sgr0)
+
 all: $(EXE).tns
 
 %.o: %.c
+	$(info $(bold)Compiling $< $(sgr0))
 	$(GCC) $(GCCFLAGS) -c $< -o $@
 
 %.o: %.cpp
+	$(info $(bold)Compiling $< $(sgr0))
 	$(GXX) $(GCCFLAGS) -c $< -o $@
 
 %.o: %.S
 	$(AS) -c $< -o $@
 
 $(EXE).elf: $(OBJS)
+	$(info $(bold)Linking $(sgr0))
 	mkdir -p $(DISTDIR)
 	$(LD) $^ $(LDFLAGS) -o $@
 
 $(EXE).tns: $(EXE).elf
+	$(info $(bold)Making Executable $@ $(sgr0))
 	$(GENZEHN) --input $^ --output $@.zehn $(ZEHNFLAGS)
 	make-prg $@.zehn $@
 	rm $@.zehn
