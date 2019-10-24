@@ -50,7 +50,6 @@ struct GameObject {
 };
 
 //Global variables that all classes should have access to
-extern unsigned long oT;
 extern bool done;
 extern SDL_Surface* screen;
 extern nSDL_Font *font, *grey_font, *black_font;

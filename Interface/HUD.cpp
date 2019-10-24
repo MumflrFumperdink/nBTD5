@@ -82,7 +82,7 @@ void HUD::draw(float fElapsedTime) {
 	SDL_FreeSurface(speedImg);
 }
 
-void HUD::select(unsigned char object, Level* l) {
+void HUD::select(long oT, unsigned char object, Level* l) {
 	if (object < interactables.size()) {
 		switch (interactables.at(object).type) {
 			case CHARACHTER_SELECT:
@@ -168,8 +168,8 @@ unsigned char HUD::getSpeed() {
 	return speed;
 }
 
-unsigned char HUD::getInvSpeed() {
-	return 4 - speed;
+float HUD::getInvSpeed() {
+	return 1.0 / speed;
 }
 
 unsigned char HUD::getRound() {

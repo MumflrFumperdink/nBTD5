@@ -24,14 +24,14 @@ class HUD {
 		HUD();
 		~HUD();
 		void draw(float fElapsedTime);
-		void select(unsigned char object, Level* l);
+		void select(long oT, unsigned char object, Level* l);
 		void deselect(Level* l);
 		signed char getSelected();
 		unsigned int getMoney();
 		void addMoney(signed int add);
 		void addMoney(unsigned int add);
 		unsigned char getSpeed();
-		unsigned char getInvSpeed();
+		float getInvSpeed();
 		void setSpeed(unsigned char inspd);
 		signed int getLives();
 		char getCharachterOffset();

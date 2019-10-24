@@ -13,7 +13,6 @@ nSDL_Font* font;
 nSDL_Font* grey_font;
 nSDL_Font* black_font;
 bool done = false;
-unsigned long oT = 0;
 Mouse m;
 std::vector<std::array<short, 2>> checkpoints;
 std::vector<GameObject> interactables;
@@ -92,7 +91,7 @@ int main(void) {
             }
             if (m.hasClicked()) {
                 if (m.isTouchingInteractable() && ((h.getSelected() < 0) || (h.getSelected() > 9 && (m.whichInteractable(&h) == 7 || m.whichInteractable(&h) == 8)))) {
-                    h.select(m.whichInteractable(&h), &level);
+                    h.select(tp2, m.whichInteractable(&h), &level);
                 }
                 else {
                     if (m.getY() < LEVEL_HEIGHT && h.getSelected() >= 0 && h.getSelected() < 7) {
@@ -106,8 +105,6 @@ int main(void) {
             if (isKeyPressed(KEY_NSPIRE_ESC)) {
                 done = true;
             }
-
-            oT++;
 
             SDL_Flip(screen);
         }

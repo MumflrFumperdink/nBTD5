@@ -13,6 +13,7 @@
 #include "../Projectile/Dart.h"
 
 Level::Level(LevelName l) {
+	timePassed = 0.0;
 	name = l;
 	switch (name) {
 		case MONKEY_LANE:
@@ -93,10 +94,14 @@ bool Level::hasRoundCleared(unsigned char currentRound) {
 	return count == numBloonTypes;
 }
 
+constexpr const static float timeBetween = 0.072;
+
 void Level::loop(float fElapsedTime, HUD* h) {
 	if (h->getRound() < 16 and h->getSpeed() > PAUSE) {
+		timePassed += fElapsedTime;
 		for (unsigned char i = 0; i < sizeof(rounds[h->getRound()])/sizeof(rounds[h->getRound()][0]); i++) {
-			if (rounds[h->getRound()][i][0] > 0 && oT % (rounds[h->getRound()][i][1] * h->getInvSpeed()) == 0) { //Is the type in this round
+			if (rounds[h->getRound()][i][0] > 0 && timePassed >= timeBetween * rounds[h->getRound()][i][1] * h->getInvSpeed()) { //Is the type in this round
+				timePassed -= timeBetween * rounds[h->getRound()][i][1] * h->getInvSpeed();
 				bloons.push_back(new Bloon(static_cast<BloonType>(i)));
 				rounds[h->getRound()][i][0]--;
 			}
@@ -144,6 +149,7 @@ void Level::loop(float fElapsedTime, HUD* h) {
 	if (hasRoundCleared(h->getRound()) && (signed)bloons.size() <= 0) { //round ended
 		for (auto &p : projectiles) delete p;
 		projectiles.clear();
+		timePassed = 0.0;
 		h->setSpeed(PAUSE);
 	}
 }

@@ -25,6 +25,8 @@ class Level {
 		std::vector<Character*>& getCharachters();
 		std::vector<SDL_Rect>* getTrackCheckpoints();
 	private:
+		float timePassed;
+
 		SDL_Surface* level;
 
 		LevelName name;
