@@ -13,13 +13,6 @@
 class Level;
 
 class HUD {
-	private:
-		SDL_Surface *hud, *plank;
-		signed char charachterOffset/*How many right is the first*/, selecting/*Which Charachter is selected*/;
-		unsigned char speed, round;
-		signed int lives;
-		unsigned int money;
-
 	public:
 		HUD();
 		~HUD();
@@ -30,7 +23,7 @@ class HUD {
 		unsigned int getMoney();
 		void addMoney(signed int add);
 		void addMoney(unsigned int add);
-		unsigned char getSpeed();
+		float getSpeed();
 		float getInvSpeed();
 		void setSpeed(unsigned char inspd);
 		signed int getLives();
@@ -38,4 +31,11 @@ class HUD {
 		unsigned char getRound();
 		void setLives(signed int inlives);
 		void setMoney(unsigned int mon);
+	private:
+		SDL_Surface *hud, *plank;
+		signed char charachterOffset/*How many right is the first*/, selecting/*Which Charachter is selected*/;
+		unsigned char speed, round;
+		signed int lives;
+		unsigned int money;
+		float sped[4] = {0.00, 1.00, 1.50, 2.00};
 };

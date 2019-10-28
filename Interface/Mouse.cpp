@@ -23,7 +23,8 @@ bool Mouse::intersects(std::vector<SDL_Rect>* rects) {
 
 void Mouse::draw(HUD* h) {
 	signed char touching = whichInteractable(h);
-	signed char selecting = touching + h->getCharachterOffset();
+	signed char touching_off = touching + h->getCharachterOffset();
+	signed char selecting = h->getSelected() + h->getCharachterOffset();
 
 	if (h->getSelected() >= 0 && h->getSelected() < 7) {
 		SDL_Surface* charachter = load_Charachter(static_cast<Charachter>(selecting));
@@ -40,7 +41,7 @@ void Mouse::draw(HUD* h) {
 		SDL_FreeSurface(touching_cursor);
 
 		if (touching >= 0 && touching < 7) {
-			nSDL_DrawString(screen, font, x + 5, y - 5, "$%d", charCost[selecting]);
+			nSDL_DrawString(screen, font, x + 5, y - 5, "$%d", charCost[touching_off]);
 		}
 	}
 	else {

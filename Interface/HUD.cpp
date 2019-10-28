@@ -164,12 +164,12 @@ void HUD::setMoney(unsigned int mon) {
 	money = mon;
 }
 
-unsigned char HUD::getSpeed() {
-	return speed;
+float HUD::getSpeed() {
+	return sped[speed];
 }
 
 float HUD::getInvSpeed() {
-	return 1.0 / speed;
+	return 1.0 / sped[speed];
 }
 
 unsigned char HUD::getRound() {
