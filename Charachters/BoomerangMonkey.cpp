@@ -45,7 +45,7 @@ void BoomerangMonkey::gameLoop(float fElapsedTime, HUD* h, std::vector<Bloon*>* 
 	}
 }
 
-void BoomerangMonkey::draw(HUD* h) {
+void BoomerangMonkey::draw() {
 	if (selected) {
 		filledCircleRGBA(screen, x, y, range, 0, 0, 0, 128);
 	}
@@ -62,10 +62,13 @@ void BoomerangMonkey::draw(HUD* h) {
 	SDL_SetColorKey(img, SDL_SRCCOLORKEY | SDL_RLEACCEL, SDL_MapRGB(img->format, 0, 0, 0));
 	SDL_CustomBlit(img, x, y, angle);
 	SDL_FreeSurface(img);
+}
 
+void BoomerangMonkey::drawUp(HUD* h) {
 	//Upgrade Menu
 	if (selected) {
 		SDL_Surface *upgrade1, *upgrade2;
+		SDL_Surface* monkey_avatar = nSDL_LoadImage(hud_boomerang_monkey_small_avatar);
 		char title1[30], title2[30];
 		unsigned char addx = 0;
 		bool avail[2] = {h->getMoney() >= getUpgradeCost(0), h->getMoney() >= getUpgradeCost(1)};
@@ -100,13 +103,10 @@ void BoomerangMonkey::draw(HUD* h) {
 		SDL_SetColorKey(upgrade1, SDL_SRCCOLORKEY | SDL_RLEACCEL, SDL_MapRGB(upgrade1->format, 0, 0, 0));
 		SDL_SetColorKey(upgrade2, SDL_SRCCOLORKEY | SDL_RLEACCEL, SDL_MapRGB(upgrade2->format, 0, 0, 0));
 
-		upgradeSideBar(" Boomerang", upgrade1, addx, title1, upgrade2, title2, avail);
+		upgradeSideBar(" Boomerang", upgrade1, addx, title1, upgrade2, title2, monkey_avatar, avail);
 
 		SDL_FreeSurface(upgrade1);
 		SDL_FreeSurface(upgrade2);
-
-		SDL_Surface* monkey_avatar = nSDL_LoadImage(hud_boomerang_monkey_small_avatar);
-		SDL_CustomBlitCorner(monkey_avatar, S_WIDTH - (hud_x * 7 / 8), 35);
 		SDL_FreeSurface(monkey_avatar);
 	}
 }
@@ -139,13 +139,4 @@ void BoomerangMonkey::upGrade(unsigned char path) {
 		}
 	}
 	upgrade[path]++;
-}
-
-void BoomerangMonkey::select() {
-	hud_x = 0;
-	selected = true;
-}
-
-void BoomerangMonkey::deselect() {
-	selected = false;
 }

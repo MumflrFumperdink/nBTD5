@@ -19,7 +19,8 @@ class Level {
 		Level(LevelName l);
 		~Level();
 		bool hasRoundCleared(unsigned char currentRound);
-		void draw(HUD* h);
+		void draw();
+		void drawUp(HUD* h);
 		void loop(float fElapsedTime, HUD* h);
 		void addCharachter(Mouse* m, HUD* h);
 		std::vector<Character*>& getCharachters();

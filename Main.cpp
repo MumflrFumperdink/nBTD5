@@ -80,10 +80,11 @@ int main(void) {
             fElapsedTime = (tp2 - tp1) / 1000.0;
             tp1 = tp2;
 
-            level.draw(&h);
+            level.draw();
             level.loop(fElapsedTime, &h);
 
             h.draw(fElapsedTime);
+            level.drawUp(&h);
 
             m.update();
             if (m.hasMoved()) {

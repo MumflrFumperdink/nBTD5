@@ -80,8 +80,8 @@ signed char Mouse::whichInteractable(HUD* h) {
 	SDL_Rect mouse = {x, y, 1, 1};
 	SDL_Rect intersection; //used to find intersection area of rects
 	for (unsigned char i = 0; i < interactables.size(); i++) {
-		if (SDL_IntersectRect(&interactables.at(i).pos, &mouse, &intersection)) {
-			if (!(h->getSelected() < 0 && (i == 7 || i == 8))) return i;
+		if (SDL_IntersectRect(&interactables[i].pos, &mouse, &intersection)) {
+			if (h->getSelected() >= 0 || (i != 7 && i != 8)) return i;
 		}
 	}
 	return -1;

@@ -64,7 +64,7 @@ Level::Level(LevelName l) {
 	}
 }
 
-void Level::draw(HUD* h) {
+void Level::draw() {
 	SDL_BlitSurface(level, NULL, screen, NULL);
 
 	if (isKeyPressed(KEY_NSPIRE_ENTER)) {
@@ -82,7 +82,13 @@ void Level::draw(HUD* h) {
 	}
 
 	for (short i = 0; i < charchters.size(); i++) {
-		charchters[i]->draw(h);
+		charchters[i]->draw();
+	}
+}
+
+void Level::drawUp(HUD* h) {
+	for (short i = 0; i < charchters.size(); i++) {
+		charchters[i]->drawUp(h);
 	}
 }
 

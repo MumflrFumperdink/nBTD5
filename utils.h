@@ -6,6 +6,9 @@
 #define LEVEL_HEIGHT 212
 #define HUD_HEIGHT 38
 
+#define FLIP_VERTICAL 1
+#define FLIP_HORIZONTAL 2
+
 #define PI 3.14159265
 
 #include "images.h"
@@ -13,6 +16,7 @@
 #include <os.h>
 #include <SDL/SDL.h>
 #include <SDL/SDL_rotozoom.h>
+#include <SDL/SDL_gfxPrimitives.h>
 #include <vector>
 #include <cmath>
 #include <array>
@@ -79,6 +83,9 @@ static const unsigned short Boomerang_Monkey_upgradePrices[2][4] = {
   {100, 150, 1600, 3000}
 };
 
+void put_pixel(SDL_Surface *surface, int x, int y, Uint32 pixel);
+Uint32 get_pixel( SDL_Surface *surface, int x, int y);
+SDL_Surface* flip_surface( SDL_Surface *surface, int flags);
 double radians(double degrees);
 void SDL_CustomBlit(SDL_Surface* img, short x, short y, double angle);
 void SDL_CustomBlit(SDL_Surface* img, float x, float y, double angle);

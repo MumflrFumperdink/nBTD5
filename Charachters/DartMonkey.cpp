@@ -45,7 +45,7 @@ void DartMonkey::gameLoop(float fElapsedTime, HUD* h, std::vector<Bloon*>* bloon
 	}
 }
 
-void DartMonkey::draw(HUD* h) {
+void DartMonkey::draw() {
 	if (selected) {
 		filledCircleRGBA(screen, x, y, range, 0, 0, 0, 128);
 	}
@@ -98,10 +98,13 @@ void DartMonkey::draw(HUD* h) {
 		SDL_RotateBlitAroundPoint(addOn, angle, 0, x, y, -3);
 		SDL_FreeSurface(addOn);
 	}
+}
 
+void DartMonkey::drawUp(HUD* h) {
 	//Upgrade Menu
 	if (selected) {
 		SDL_Surface *upgrade1, *upgrade2;
+		SDL_Surface* monkey_avatar = nSDL_LoadImage(hud_dart_monkey_small_avatar);
 		char title1[30], title2[30];
 		unsigned char addx = 0;
 		bool avail[2] = {h->getMoney() >= getUpgradeCost(0), h->getMoney() >= getUpgradeCost(1)};
@@ -135,13 +138,11 @@ void DartMonkey::draw(HUD* h) {
 		SDL_SetColorKey(upgrade1, SDL_SRCCOLORKEY | SDL_RLEACCEL, SDL_MapRGB(upgrade1->format, 0, 0, 0));
 		SDL_SetColorKey(upgrade2, SDL_SRCCOLORKEY | SDL_RLEACCEL, SDL_MapRGB(upgrade2->format, 0, 0, 0));
 
-		upgradeSideBar("Dart Monkey", upgrade1, addx, title1, upgrade2, title2, avail);
+		upgradeSideBar("Dart Monkey", upgrade1, addx, title1, upgrade2, title2, monkey_avatar, avail);
 
 		SDL_FreeSurface(upgrade1);
 		SDL_FreeSurface(upgrade2);
 
-		SDL_Surface* monkey_avatar = nSDL_LoadImage(hud_dart_monkey_small_avatar);
-		SDL_CustomBlitCorner(monkey_avatar, S_WIDTH - (hud_x * 7 / 8), 35);
 		SDL_FreeSurface(monkey_avatar);
 	}
 }
@@ -173,13 +174,4 @@ void DartMonkey::upGrade(unsigned char path) {
 		}
 	}
 	upgrade[path]++;
-}
-
-void DartMonkey::select() {
-	hud_x = 0;
-	selected = true;
-}
-
-void DartMonkey::deselect() {
-	selected = false;
 }
