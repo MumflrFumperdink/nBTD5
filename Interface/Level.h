@@ -18,13 +18,13 @@ class Level {
 	public:
 		Level(LevelName l);
 		~Level();
-		bool hasRoundCleared(unsigned char currentRound);
-		void draw();
-		void drawUp(HUD* h);
+		bool hasRoundCleared(unsigned char currentRound) const;
+		void draw() const;
+		void drawUp(HUD* h) const;
 		void loop(float fElapsedTime, HUD* h);
 		void addCharachter(Mouse* m, HUD* h);
 		std::vector<Character*>& getCharachters();
-		std::vector<SDL_Rect>* getTrackCheckpoints();
+		std::vector<SDL_Rect>* getTrackCheckpoints() const;
 	private:
 		float timePassed;
 

@@ -15,14 +15,14 @@ class Mouse {
 		SDL_Surface* cursor;
 	public:
 		Mouse();
-		void draw(HUD* h);
+		void draw(HUD* h) const;
 		void update();
-		signed char whichInteractable(HUD* h);
-		bool isTouchingInteractable();
-		bool intersects(std::vector<SDL_Rect>* rects);
-		bool hasClicked();
+		signed char whichInteractable(HUD* h) const;
+		bool isTouchingInteractable() const;
+		bool intersects(std::vector<SDL_Rect>* rects) const;
+		bool hasClicked() const;
 		bool hasMoved();
-		short getX();
-		short getY();
+		short getX() const;
+		short getY() const;
 		void quit();
 };

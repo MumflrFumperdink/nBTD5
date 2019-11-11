@@ -11,10 +11,10 @@ Projectile::~Projectile() {
   //??
 }
 
-float Projectile::getX() {
+float Projectile::getX() const {
   return x;
 }
 
-float Projectile::getY() {
+float Projectile::getY() const {
   return y;
 }

@@ -16,19 +16,19 @@ class HUD {
 	public:
 		HUD();
 		~HUD();
-		void draw(float fElapsedTime);
+		void draw(float fElapsedTime) const;
 		void select(long oT, unsigned char object, Level* l);
 		void deselect(Level* l);
-		signed char getSelected();
-		unsigned int getMoney();
+		signed char getSelected() const;
+		unsigned int getMoney() const;
 		void addMoney(signed int add);
 		void addMoney(unsigned int add);
-		float getSpeed();
-		float getInvSpeed();
+		float getSpeed() const;
+		float getInvSpeed() const;
 		void setSpeed(unsigned char inspd);
-		signed int getLives();
-		char getCharachterOffset();
-		unsigned char getRound();
+		signed int getLives() const;
+		char getCharachterOffset() const;
+		unsigned char getRound() const;
 		void setLives(signed int inlives);
 		void setMoney(unsigned int mon);
 	private:

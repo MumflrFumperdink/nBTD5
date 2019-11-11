@@ -35,7 +35,7 @@ void Character::deselect() {
 
 #define FULL_UPGRADE_BAR 91
 
-void Character::upgradeSideBar(const char* title, SDL_Surface* upgrade1, unsigned char addx, char* title1, SDL_Surface* upgrade2, char* title2, SDL_Surface* avatar, bool* avail) {
+void Character::upgradeSideBar(const char* title, SDL_Surface* upgrade1, unsigned char addx, char* title1, SDL_Surface* upgrade2, char* title2, SDL_Surface* avatar, bool* avail) const {
   if (hud_x < FULL_UPGRADE_BAR) {
     hud_x += 13;
   }
@@ -53,17 +53,17 @@ void Character::upgradeSideBar(const char* title, SDL_Surface* upgrade1, unsigne
 
   SDL_Surface* upgrade_title = nSDL_LoadImage(hud_upgrade_title_back);
   SDL_SetColorKey(upgrade_title, SDL_SRCCOLORKEY | SDL_RLEACCEL, SDL_MapRGB(upgrade_title->format, 0, 0, 0));
-  SDL_CustomBlitCorner(upgrade_title, lefty ? S_WIDTH - (hud_x * 7 / 8) : (hud_x / 7) - (FULL_UPGRADE_BAR / 7), 5);
+  SDL_CustomBlitCorner(upgrade_title, lefty ? S_WIDTH - (hud_x * 7 / 8) : hud_x + 7 - FULL_UPGRADE_BAR, 5);
   SDL_FreeSurface(upgrade_title);
 
-  nSDL_DrawString(screen, font, lefty ? S_WIDTH - (hud_x * 6 / 7) : (hud_x / 7) - (short)(FULL_UPGRADE_BAR / 7), 10, title);
+  if ((hud_x + 8 - FULL_UPGRADE_BAR >= 0 && lefty) || !lefty) nSDL_DrawString(screen, font, lefty ? S_WIDTH - (hud_x * 6 / 7) : hud_x + 8 - FULL_UPGRADE_BAR, 10, title);
 
   SDL_Rect border = {lefty ? S_WIDTH - hud_x + 8 : hud_x + 8 - FULL_UPGRADE_BAR, 31, 42, 42};
   SDL_FillRect(screen, &border, SDL_MapRGB(screen->format, 72, 42, 2));
 
-  SDL_CustomBlitCorner(avatar, lefty ? (hud_x * 7 / 8) - S_WIDTH : hud_x + 11 - FULL_UPGRADE_BAR, 35);
+  SDL_CustomBlitCorner(avatar, lefty ? S_WIDTH - (hud_x * 7 / 8) : hud_x + 11 - FULL_UPGRADE_BAR, 35);
 
-  short xpos = lefty ? S_WIDTH - hud_x + 5 : hud_x + 1 - FULL_UPGRADE_BAR;
+  signed short xpos = lefty ? S_WIDTH - hud_x + 5 : hud_x + 1 - FULL_UPGRADE_BAR;
   for (unsigned char i = 0; i < 2; i++) {
     SDL_Surface* upgrade_slot = avail[i] ? nSDL_LoadImage(hud_upgrade_slot) : nSDL_LoadImage(hud_upgrade_slot_unavailable);
     SDL_SetColorKey(upgrade_slot, SDL_SRCCOLORKEY | SDL_RLEACCEL, SDL_MapRGB(upgrade_slot->format, 0, 0, 0));

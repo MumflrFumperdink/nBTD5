@@ -11,7 +11,7 @@ Mouse::Mouse() {
 	SDL_SetColorKey(cursor, SDL_SRCCOLORKEY | SDL_RLEACCEL, SDL_MapRGB(cursor->format, 0, 0, 0));
 }
 
-bool Mouse::intersects(std::vector<SDL_Rect>* rects) {
+bool Mouse::intersects(std::vector<SDL_Rect>* rects) const {
 	SDL_Rect mRect = {x, y, 1, 1};
 	SDL_Rect intersection;
 	for (unsigned char i = 0; i < rects->size(); i++) {
@@ -21,7 +21,7 @@ bool Mouse::intersects(std::vector<SDL_Rect>* rects) {
 	return false;
 }
 
-void Mouse::draw(HUD* h) {
+void Mouse::draw(HUD* h) const {
 	signed char touching = whichInteractable(h);
 	signed char touching_off = touching + h->getCharachterOffset();
 	signed char selecting = h->getSelected() + h->getCharachterOffset();
@@ -65,7 +65,7 @@ bool Mouse::hasMoved() {
 	return false;
 }
 
-bool Mouse::isTouchingInteractable() {
+bool Mouse::isTouchingInteractable() const {
 	SDL_Rect mouse = {x, y, 1, 1};
 	SDL_Rect intersection; //used to find intersection area of rects
 	for (unsigned char i = 0; i < interactables.size(); i++) {
@@ -76,7 +76,7 @@ bool Mouse::isTouchingInteractable() {
 	return false;
 }
 
-signed char Mouse::whichInteractable(HUD* h) {
+signed char Mouse::whichInteractable(HUD* h) const {
 	SDL_Rect mouse = {x, y, 1, 1};
 	SDL_Rect intersection; //used to find intersection area of rects
 	for (unsigned char i = 0; i < interactables.size(); i++) {
@@ -87,15 +87,15 @@ signed char Mouse::whichInteractable(HUD* h) {
 	return -1;
 }
 
-bool Mouse::hasClicked() {
+bool Mouse::hasClicked() const {
 	return tpad_report.pressed == true;
 }
 
-short Mouse::getX() {
+short Mouse::getX() const {
 	return x;
 }
 
-short Mouse::getY() {
+short Mouse::getY() const {
 	return y;
 }
 

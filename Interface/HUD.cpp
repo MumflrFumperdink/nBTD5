@@ -16,7 +16,7 @@ HUD::HUD() {
 	lives = 150; //https://bloons.fandom.com/wiki/Lives
 }
 
-void HUD::draw(float fElapsedTime) {
+void HUD::draw(float fElapsedTime) const {
 	SDL_Rect hud_rect = {0, LEVEL_HEIGHT + 1};
 	SDL_BlitSurface(hud, NULL, screen, &hud_rect);
 	//every plank starting at x = 100
@@ -144,7 +144,7 @@ void HUD::addMoney(unsigned int add) {
 	money += add;
 }
 
-signed int HUD::getLives() {
+signed int HUD::getLives() const {
 	return lives;
 }
 
@@ -152,11 +152,11 @@ void HUD::setLives(signed int inlives) {
 	lives = inlives;
 }
 
-signed char HUD::getSelected() {
+signed char HUD::getSelected() const {
 	return selecting;
 }
 
-unsigned int HUD::getMoney() {
+unsigned int HUD::getMoney() const {
 	return money;
 }
 
@@ -164,19 +164,19 @@ void HUD::setMoney(unsigned int mon) {
 	money = mon;
 }
 
-float HUD::getSpeed() {
+float HUD::getSpeed() const {
 	return sped[speed];
 }
 
-float HUD::getInvSpeed() {
+float HUD::getInvSpeed() const {
 	return 1.0 / sped[speed];
 }
 
-unsigned char HUD::getRound() {
+unsigned char HUD::getRound() const {
 	return round - 1; //Round is offset by one for top left HUD
 }
 
-char HUD::getCharachterOffset() {
+char HUD::getCharachterOffset() const {
 	return charachterOffset;
 }
 

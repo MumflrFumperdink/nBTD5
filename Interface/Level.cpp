@@ -64,7 +64,7 @@ Level::Level(LevelName l) {
 	}
 }
 
-void Level::draw() {
+void Level::draw() const {
 	SDL_BlitSurface(level, NULL, screen, NULL);
 
 	if (isKeyPressed(KEY_NSPIRE_ENTER)) {
@@ -86,13 +86,13 @@ void Level::draw() {
 	}
 }
 
-void Level::drawUp(HUD* h) {
+void Level::drawUp(HUD* h) const {
 	for (short i = 0; i < charchters.size(); i++) {
 		charchters[i]->drawUp(h);
 	}
 }
 
-bool Level::hasRoundCleared(unsigned char currentRound) {
+bool Level::hasRoundCleared(unsigned char currentRound) const {
 	unsigned char count = 0;
 	for (unsigned short i = 0; i < sizeof(rounds[currentRound])/sizeof(rounds[currentRound][0]); i++) {
 		if (rounds[currentRound][i][0] <= 0) count++;
@@ -100,7 +100,7 @@ bool Level::hasRoundCleared(unsigned char currentRound) {
 	return count == numBloonTypes;
 }
 
-constexpr const static float timeBetween = 0.072;
+constexpr static float timeBetween = 0.072;
 
 void Level::loop(float fElapsedTime, HUD* h) {
 	if (h->getRound() < 16 and h->getSpeed() > PAUSE) {

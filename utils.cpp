@@ -1,9 +1,25 @@
 #include "utils.h"
 
-double radians(double degrees) {
-  return degrees * PI / 180.0;
+double radians(double degree) {
+  return degree * PI / 180.0;
 }
 
+double degrees(double radian) {
+  return radian * 180.0 / PI;
+}
+
+double distBetween(short x1, short y1, short x2, short y2) {
+  short sideH = abs(x1 - x2);
+  short sideV = abs(y1 - y2);
+  return hypot(sideH, sideV);
+}
+
+double angleBetween(short x1, short y1, short x2, short y2) {
+  short sideH = x1 - x2;
+  short sideV = y1 - y2;
+
+  return 90 - degrees(std::atan2(sideV, sideH));
+}
 
 //From http://sdl.beuc.net/sdl.wiki/Pixel_Access
 void put_pixel(SDL_Surface *surface, int x, int y, Uint32 pixel) {
@@ -199,19 +215,6 @@ bool SDL_IntersectRect(SDL_Rect *A, SDL_Rect *B, SDL_Rect *intersection) {
 
   return (intersection->w && intersection->h);
 } //Copied from https://github.com/hoffa/nSDL/blob/de58382bd540c26cbd614259541f967277662b72/src/video/SDL_surface.c
-
-double distBetween(short x1, short y1, short x2, short y2) {
-  short sideH = abs(x1 - x2);
-  short sideV = abs(y1 - y2);
-  return hypot(sideH, sideV);
-}
-
-double angleBetween(short x1, short y1, short x2, short y2) {
-  short sideH = x1 - x2;
-  short sideV = y1 - y2;
-
-  return 90 - std::atan2(sideV, sideH) * 180 / PI;
-}
 
 //Functions with Images
 SDL_Surface* load_Level(LevelName choice) {

@@ -17,8 +17,8 @@ class Projectile {
 		Bloon* lastPopped;
 	public:
 		Projectile(short inx, short iny, double inangle);
-		float getX();
-		float getY();
+		float getX() const;
+		float getY() const;
 		virtual ~Projectile();
 		virtual void draw() = 0;
 		virtual bool gameLoop(float fElapsedTime, std::vector<Bloon*>* bloons, HUD* h) = 0;
